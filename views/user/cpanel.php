@@ -51,8 +51,8 @@
 
 
                 <?php foreach($slaves as $u){ echo "
-                  
-                  <core-submenu icon='social:person' label='{$u->device}'>
+
+                  <core-submenu icon='social:person' id='{$u->imei}' label='{$u->device}'>
                   <core-item icon='communication:call' label='Call Logs' class='calllogs'></core-item>
                   <core-item icon='communication:contacts' label='Contacts' class='contacts'></core-item>
                   <core-item icon='communication:message' label='Messages' class='sms'></core-item>
@@ -60,7 +60,7 @@
                   <core-item icon='image:audiotrack' label='Audio' class='audio'></core-item>
                   <core-item icon='maps:my-location' label='Location' class='location'></core-item>
                   <core-item icon='social:cake' label='Extras' class='extras'></core-item>
-                  
+
             </core-submenu>"; } ?>
 
 
@@ -86,7 +86,7 @@
                 <paper-progress value="2" min="0" max="100"></paper-progress>
 
             </paper-shadow>
-      
+
         </div>
 
     </core-scaffold>

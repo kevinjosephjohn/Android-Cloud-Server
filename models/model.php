@@ -107,10 +107,10 @@ return $device;
 public function getCalls($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT callstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT callstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->callstate;
-$query=$this->db->query("SELECT calls FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT calls FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $calls= json_decode($res[0]->calls,true);
 return array(
@@ -123,10 +123,10 @@ return array(
 public function getContacts($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT contactstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT contactstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->contactstate;
-$query=$this->db->query("SELECT contacts FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT contacts FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $contacts= json_decode($res[0]->contacts,true);
 return array(
@@ -138,10 +138,10 @@ return array(
 public function getMessages($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT messages FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT messages FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $messages= json_decode($res[0]->messages,true);
-$query=$this->db->query("SELECT smsstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT smsstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->smsstate;
 return array(
@@ -153,7 +153,7 @@ return array(
 public function getCamera($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT uniqueid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT uniqueid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $uniqueid= $res[0]->uniqueid;
 return array(
@@ -165,10 +165,10 @@ return array(
 public function getLocation($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT location FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT location FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $loc= $res[0]->location;
-    $query=$this->db->query("SELECT locstate FROM slaves WHERE device='$device' AND username='$username'");
+    $query=$this->db->query("SELECT locstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->locstate;
 return array(
@@ -184,7 +184,7 @@ public function status($device)
 {
 $username=$this->session->userdata('username');
 $username="kevin";
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="status";
@@ -198,7 +198,7 @@ public function sendSMS($device,$number,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="sendSMS";
@@ -209,8 +209,7 @@ $this->pushExtras($slaveid,$type,$number,$message);
 public function makeCall($device,$number)
 {
 $username=$this->session->userdata('username');
-
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="makeCall";
@@ -218,11 +217,10 @@ $message="makeCall";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo $type.$message." executed";
+echo "Calling".$number."right now.";
 }
 else
 {
-echo "error turning on light";
 
 }
 }
@@ -231,7 +229,7 @@ public function flashLight($device,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="flashLight";
@@ -253,7 +251,7 @@ public function vibratePhone($device,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="vibrate";
@@ -276,7 +274,7 @@ public function alarm($device,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="alarm";
@@ -298,7 +296,7 @@ public function takePhoto($device,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="takePhoto";
@@ -319,7 +317,7 @@ public function captureAudio($device,$message)
 {
 $username=$this->session->userdata('username');
 
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="captureAudio";
@@ -370,13 +368,13 @@ return $device;
 public function refreshCalls($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT callstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT callstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->callstate;
 
 if ($state=="recieved")
 {
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="getcalllogs";
@@ -391,10 +389,10 @@ $this->pushExtras($slaveid,$type,$message,$number);
 sleep(10);
 //
 //RETURN DATA
-$query=$this->db->query("SELECT calls FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT calls FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $calls = json_decode($res[0]->calls,true);
-$query=$this->db->query("SELECT callstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT callstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->callstate;
     return array(
@@ -406,12 +404,12 @@ $state=$res[0]->callstate;
 public function refreshContacts($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT contactstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT contactstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->contactstate;
 if ($state=="recieved")
 {
-	$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+	$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 	$res=$query->result();
 	$slaveid=$res[0]->slaveid;
 	$type="getcontacts";
@@ -427,10 +425,10 @@ if ($state=="recieved")
 
 
 //RETURN DATA
-$query=$this->db->query("SELECT contacts FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT contacts FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $contacts = json_decode($res[0]->contacts,true);
-$query=$this->db->query("SELECT contactstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT contactstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->contactstate;
     return array(
@@ -444,12 +442,12 @@ $state=$res[0]->contactstate;
 public function refreshMessages($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT smsstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT smsstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->smsstate;
 if ($state=="recieved")
 {
-	$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+	$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 	$res=$query->result();
 	$slaveid=$res[0]->slaveid;
 	$type="getmessages";
@@ -466,10 +464,10 @@ if ($state=="recieved")
 sleep(10);
 
 //RETURN DATA
-$query=$this->db->query("SELECT messages FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT messages FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $messages = json_decode($res[0]->messages,true);
-$query=$this->db->query("SELECT smsstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT smsstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->smsstate;
     return array(
@@ -483,12 +481,12 @@ $state=$res[0]->smsstate;
 public function refreshLocation($device)
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT locstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT locstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->locstate;
 if ($state=="recieved")
 {
-	$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+	$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 	$res=$query->result();
 	$slaveid=$res[0]->slaveid;
 	$type="getlocation";
@@ -504,10 +502,10 @@ if ($state=="recieved")
 
 sleep(10);
     //RETURN DATA
-$query=$this->db->query("SELECT location FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT location FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $location= $res[0]->location;
-$query=$this->db->query("SELECT locstate FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT locstate FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $state=$res[0]->locstate;
     return array(
@@ -580,25 +578,25 @@ $data=array('username'=>$username,'slaveid'=>$slaveid,'imei'=>$imei,'number'=>$p
 $bool=$this->db->insert('slaves',$data);
 
 //
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="call";
 $this->sendPush($slaveid,$type);
 //
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="contacts";
 $this->sendPush($slaveid,$type);
 //
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="messages";
 $this->sendPush($slaveid,$type);
 //
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE device='$device' AND username='$username'");
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
 $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="location";

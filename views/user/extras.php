@@ -232,7 +232,7 @@
                   console.log(response);
                   if(response=="success")
                   {
-                    callNumber.isInvalid = false;
+                   callNumber.isInvalid = false;
                    toast.text = response;
                    toast.show();
 
@@ -334,6 +334,8 @@
 
     <paper-input-decorator floatingLabel label="Phone Number" id='p-call-number'>
         <input is="core-input" class="form-control" type="text" id="call-number">
+        <input type="hidden" class="form-control" id="device" name="device" <?php echo "value='".$device. "'" ?> >
+
     </paper-input-decorator>
 
 

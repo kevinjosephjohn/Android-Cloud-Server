@@ -52,22 +52,21 @@
 
 </script>
 
-<?php 
+<?php
 $state = $array['state'];
 $messages = $array['messages'];
     if ($state=="sent")
 {
      echo "<script>$('#refresh_button').hide();</script>";
-    
+
 }
 else
 {
        echo "<script>$('#refresh_button').show();</script>";
-  
+
 }
-
-foreach($messages['messages'] as $log) { 
-
+$i=0;
+foreach($messages['messages'] as $log) {
 echo "
 <paper-shadow class='card' z='1'>
     <img id=avatar style='float: right; height:20px;'  src='http://128.199.179.143/groups/assets/web/" . $log[ 'Type']. ".png' >
@@ -79,4 +78,7 @@ echo "
     <hr>
     <li class='h5-custom'>" . $log['Message']. "</li>
     <bootstrap-label>" . $log['Date']. "</bootstrap-label>
-</paper-shadow>"; } ?>
+</paper-shadow>";
+$i++;
+if($i==30)
+break;} ?>

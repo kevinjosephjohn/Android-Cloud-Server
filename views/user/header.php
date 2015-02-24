@@ -93,7 +93,7 @@
             var lol;
             $(".calllogs").click(function () {
                 $("#progress").show();
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
                 console.log(lol);
 
@@ -113,7 +113,7 @@
 
             });
             $(".contacts").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
 
                 lol = lol.trim().replace(/ /g, '%20');
                 $("#container").load("<?= base_url('user/contacts/?device=');?>" + lol);
@@ -129,7 +129,7 @@
                 drawer.closeDrawer();
             });
             $(".camera").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
                                 $("#refresh_button").hide();
 
@@ -143,7 +143,7 @@
 
             });
             $(".sms").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
 
                 $("#container").load("<?= base_url('user/messages/?device=');?>" + lol);
@@ -157,7 +157,7 @@
 
             });
                     $(".audio").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
                 $("#refresh_button").hide();
 
@@ -174,7 +174,7 @@
             });
 
             $(".location").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
 
                 $("#container").load("<?= base_url('user/location/?device=');?>" + lol);
@@ -189,7 +189,7 @@
                 drawer.closeDrawer();
             });
                     $(".extras").click(function () {
-                lol = $(this).parent().attr("label");
+                lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');
                                 $("#refresh_button").hide();
 

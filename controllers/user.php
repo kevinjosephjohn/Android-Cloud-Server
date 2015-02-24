@@ -2,14 +2,14 @@
 
 class User extends CI_Controller {
 
-	
+
 	public function User(){
         parent::__construct();
         parse_str( $_SERVER['QUERY_STRING'], $_REQUEST );
-		
+
 		if($this->session->userdata('isLogged')==0)
     	{
-			
+
 				redirect("home/login");
 
 		}
@@ -19,10 +19,10 @@ class User extends CI_Controller {
      	 	$this->load->model('model');
        		$left= $this->model->forceLogout();
 
-       	
+
         }
 
-		
+
 
     }
 	public function index()
@@ -38,7 +38,7 @@ class User extends CI_Controller {
 		redirect("home/login");
 	}
 
-	
+
 	public function dashboard(){
 
 
@@ -93,7 +93,7 @@ class User extends CI_Controller {
 		$this->load->model('model');
 		$data=array("array"=>$this->model->getMessages($this->input->get('device')));
 		$this->load->view('user/messages',$data);
-	
+
 
 
 	}
@@ -167,19 +167,19 @@ class User extends CI_Controller {
 	public function sendSMS(){
 				$this->load->model('model');
 					$this->load->library('form_validation');
-	
+
 		$this->form_validation->set_rules('number','number','required');
 
 		$this->load->model('model');
-		
 
-            if($this->form_validation->run()){       
+
+            if($this->form_validation->run()){
 
 
           $bool=$this->model->sendSMS($this->input->post('device'),$this->input->post('number'),$this->input->post('message'));
 
             }
-				
+
 
 
 	}
@@ -187,26 +187,27 @@ class User extends CI_Controller {
 	public function makeCall(){
 				$this->load->model('model');
 								$this->load->library('form_validation');
-	
+
 		$this->form_validation->set_rules('number','number','required|integer');
 	    $this->form_validation->set_rules('device','device','required');
 	    $this->form_validation->set_error_delimiters('', '');
 	    $this->form_validation->set_message('number', 'Error Message');
 
 		$this->load->model('model');
-		
 
-            if($this->form_validation->run()){       
+
+            if($this->form_validation->run()){
 
 
 $bool=$this->model->makeCall($this->input->post('device'),$this->input->post('number'));
 
 if(!$bool){
-	echo "success";
+echo $device;
+echo $number;
 }
             }
 echo  validation_errors();
- 
+
 
 
 	}
@@ -217,7 +218,7 @@ echo  validation_errors();
 
 
 	}
-	
+
 		public function vibratePhone(){
 				$this->load->model('model');
 				$bool=$this->model->vibratePhone($this->input->post('device'),$this->input->post('message'));

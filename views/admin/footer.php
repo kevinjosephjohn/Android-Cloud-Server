@@ -35,8 +35,8 @@ $.ajax({
   type: 'POST',
   data: reqData,
   success: function(response){
-  
-    
+
+
   }
 
 
@@ -54,13 +54,16 @@ $('#add').click(function(){
 var reqData={
   username: $('#username').val(),
   password: $('#password').val(),
-  paypal: $('#paypal').val()
-  
+  paypal: $('#paypal').val(),
+  amount: $('#amount').val()
+
+
 
 
 };
+console.log(reqData);
 $('#result_add').html('<img src="http://128.199.179.143/groups/assets/img/ajax-loader.gif" />')
-if(reqData['username']=='' ||reqData['password']=='' ||reqData['paypal']=='' )
+if(reqData['username']=='' ||reqData['password']=='' ||reqData['paypal']==''||reqData['amount']=='' )
 {
     $('#result_add').html('<div class="alert alert-danger">Fill all fields</div>')
 
@@ -75,8 +78,8 @@ $.ajax({
   type: 'POST',
   data: reqData,
   success: function(response){
-  
-    
+
+
   }
 
 

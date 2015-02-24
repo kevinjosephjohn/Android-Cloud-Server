@@ -201,11 +201,7 @@ class User extends CI_Controller {
 
 $bool=$this->model->makeCall($this->input->post('device'),$this->input->post('number'));
 
-if(!$bool){
-echo $device;
-echo $number;
 }
-            }
 echo  validation_errors();
 
 

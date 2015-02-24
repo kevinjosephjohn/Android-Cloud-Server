@@ -232,18 +232,13 @@
                   console.log(response);
                   if(response=="success")
                   {
-                   callNumber.isInvalid = false;
                    toast.text = response;
                    toast.show();
-
-
                   }
                   else
                   {
-
-            callNumber.isInvalid = true;
-            callNumber.error = response;
-
+            toast.text = response;
+            toast.show();
                   }
                 }
 

@@ -220,7 +220,7 @@ $where=array('slaveid'=>$gcm);
 $this->db->where($where);
 $data=array('contacts'=>$detail,'contactstate'=>$state);
 $this->db->update('slaves',$data);
-// unlink($path."contacts.txt");
+unlink($path."contacts.txt");
 echo "Contacts Uploaded";
 
 }

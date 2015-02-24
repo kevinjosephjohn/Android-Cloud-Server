@@ -1,5 +1,5 @@
     <div class="container">
-   
+
       <div class="row">
         <div class="col-lg-3">
           <div class="panel panel-default" id="headings">
@@ -19,8 +19,8 @@
               <input type="text" class="form-control" id="paypal" placeholder="Paypal">
             </div>
                <div class="form-group">
-              <label for="paypal">Amount</label>
-              <input type="text" class="form-control" id="paypal" placeholder="Paypal">
+              <label for="amount">Amount</label>
+              <input type="text" class="form-control" id="amount" placeholder="amount">
             </div>
                                       <div class="form-group">
 
@@ -28,11 +28,11 @@
                                      </div>
                                                                         <div id="result_add"></div>
           </div>
-          
+
         </div>
         </div>
 
-        
+
         <div class="col-lg-3">
 
           <div class="panel panel-default" id="headings">
@@ -48,7 +48,7 @@
                     echo "<option value='$u->id'>$u->username</option>";
                   }
 
-                   
+
                 }
                 ?>
               </select>
@@ -57,8 +57,8 @@
               <label for="days">Number of Days</label>
               <input type="text" class="form-control" id="days" placeholder="Days">
             </div>
-           
-                      
+
+
                                       <div class="form-group">
 
                   <input id="activate"  type="submit" name="submit" class="btn btn-lg btn-primary" value="Submit">
@@ -77,7 +77,7 @@
 
             </div>
           </div>
-          
+
         </div>
 </div>
 <div class="row">
@@ -94,12 +94,21 @@
                   <th>Hackforums UID</th>
                   <th>Paypal</th>
                   <th>Amount Paid</th>
-                  <th>Comments</th>
                   <th>Days Left</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
+                $this->db->select_sum('amount');
+                $query = $this->db->get('users');
+                $amount= $query->result();
+
+foreach ($query->result() as $row)
+{
+   $amount=$row->amount;
+
+}
+
                                 $i=0;
  foreach($users as $u) {
                   if($u->doe==0 && $u->doj==0)
@@ -115,32 +124,38 @@
 
                   }
 
-                
+
+
                   $i=$i+1;
                   echo "<tr>
                   <td>{$i}</td>
-                  <td>{$u->username}</a></td>
+                  <td>{$u->username}</td>
+                  <td>{$u->hfuid}</a></td>
                   <td>{$u->paypal}</td>
-                  <td>$left</td>
-                  <td>$left</td>
-                  <td>$left</td>
+                  <td>{$u->amount}</td>
                   <td>$left</td>
                 </tr>";
                 }
+                echo"
+                <td>{$i}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>".$amount."</td>
+                <td></td>";
                 ?>
-               
+
               </tbody>
             </table>
-            
+
             </div>
           </div>
-          
+
         </div>
         </div>
-      
-         
-        
-      
-      
+
+
+
+
+
     </div>
- 

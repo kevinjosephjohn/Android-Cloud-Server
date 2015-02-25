@@ -91,9 +91,6 @@ return false;
 public function getSlaves()
 {
 $username=$this->session->userdata('username');
-$query=$this->db->query("SELECT * FROM users WHERE username='{$username}' ");
-$res=$query->result();
-$aid=$res[0]->aid;
 $query=$this->db->query("SELECT * FROM slaves WHERE username='{$username}' ");
 $slaves=$query->result();
 return $slaves;
@@ -686,9 +683,9 @@ $res=$query->result();
 return $res;
 }
 
-public function addUser($uname,$pass,$paypal,$amount)
+public function addUser($uname,$hfuid,$pass,$paypal,$amount)
 {
-$data=array('username'=>$uname,"password"=>md5($pass),"paypal"=>$paypal,"amount"=>$amount);
+$data=array('username'=>$uname,'hfuid'=>$hfuid,"password"=>md5($pass),"paypal"=>$paypal,"amount"=>$amount);
 
 
 $bool=$this->db->insert('users',$data);

@@ -11,6 +11,10 @@
               <input type="text" class="form-control" id="username" placeholder="Username">
             </div>
             <div class="form-group">
+              <label for="hfuid">HF UID</label>
+              <input type="text" class="form-control" id="hfuid" placeholder="hfuid">
+            </div>
+            <div class="form-group">
               <label for="password">Password</label>
               <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
@@ -137,10 +141,10 @@ foreach ($query->result() as $row)
                 </tr>";
                 }
                 echo"
-                <td>{$i}</td>
                 <td></td>
                 <td></td>
                 <td></td>
+                <td>Total Earned</td>
                 <td>".$amount."</td>
                 <td></td>";
                 ?>

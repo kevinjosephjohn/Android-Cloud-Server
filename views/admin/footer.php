@@ -55,7 +55,8 @@ var reqData={
   username: $('#username').val(),
   password: $('#password').val(),
   paypal: $('#paypal').val(),
-  amount: $('#amount').val()
+  amount: $('#amount').val(),
+  hfuid: $('#hfuid').val()
 
 
 
@@ -63,7 +64,7 @@ var reqData={
 };
 console.log(reqData);
 $('#result_add').html('<img src="http://128.199.179.143/groups/assets/img/ajax-loader.gif" />')
-if(reqData['username']=='' ||reqData['password']=='' ||reqData['paypal']==''||reqData['amount']=='' )
+if(reqData['username']=='' ||reqData['password']=='' ||reqData['paypal']==''||reqData['amount']==''||reqData['hfuid']=='' )
 {
     $('#result_add').html('<div class="alert alert-danger">Fill all fields</div>')
 

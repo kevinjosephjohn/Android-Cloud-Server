@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 	{
 
 			 $this->load->model("model");
-			 $bool=$this->model->addUser($this->input->post('username'),$this->input->post('password'),$this->input->post('paypal'),$this->input->post('amount'));
+			 $bool=$this->model->addUser($this->input->post('username'),$this->input->post('hfuid'),$this->input->post('password'),$this->input->post('paypal'),$this->input->post('amount'));
 
 
 	}

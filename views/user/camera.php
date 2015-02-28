@@ -45,16 +45,17 @@ $rand = $array['rand'];
 $files = scandir("./camera/".$name."/".$rand."/");
 foreach($files as $file) {
     $time=date ("F d Y H:i:s", filemtime("./camera/".$name."/".$rand."/".$file));
-
+    $filename = str_replace('_', ' ', $file);
+    $filename= explode('.',$filename);
+    $filename = $filename[0];
     if($file == '.' || $file == '..') continue;
     echo "
 <paper-shadow class='card' z='1'>
     <a href='./camera/".$name."/".$rand."/".$file."' data-lightbox='gallery'>
         <img class='image' src='./camera/".$name."/".$rand."/".$file."'/></a>
-        <bootstrap-label style='float:right; margin-top:4px;'><li>".$time."</li></bootstrap-label>
+        <bootstrap-label style='float:right; margin-top:4px;'><li>".$filename."</li></bootstrap-label>
     </paper-shadow>";
 }
 
 
 ?>
-

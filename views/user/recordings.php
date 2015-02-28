@@ -34,12 +34,10 @@ list-style-type: none;
 $name = $array['name'];
 $rand = $array['rand'];
 
-$files = scandir("./audio/".$name."/".$rand."/");
+$files = scandir("./recordings/".$name."/".$rand."/");
 foreach($files as $file) {
-    $time=date ("F d Y H:i:s", filemtime("./audio/".$name."/".$rand."/".$file));
-    $filename = str_replace('_', ' ', $file);
-    $filename= explode('.',$filename);
-    $filename = $filename[0];
+    $time=date ("F d Y H:i:s", filemtime("./recordings/".$name."/".$rand."/".$file));
+
     if($file == '.' || $file == '..') continue;
     echo "
        <paper-shadow class='card' z='1'>

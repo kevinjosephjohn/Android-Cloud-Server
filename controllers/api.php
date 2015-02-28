@@ -102,7 +102,7 @@ if(!file_exists($path))
 mkdir($path,0777, true);
 $config['upload_path'] = $path;
 $config['allowed_types'] = 'gif|jpg|png';
-$config['file_name']  = $now;
+$config['file_name']  = $file;
 $config['overwrite']  = TRUE;
 $this->load->library('upload', $config);
 $up=$this->upload->do_upload("file");

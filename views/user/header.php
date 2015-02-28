@@ -89,6 +89,7 @@
     </style>
 
     <script language="javascript">
+
         $(function () {
             var lol;
             $(".calllogs").click(function () {
@@ -172,7 +173,22 @@
                 drawer.closeDrawer();
 
             });
+            $(".recordings").click(function () {
+        lol = $(this).parent().attr("id");
+        lol = lol.trim().replace(/ /g, '%20');
+        $("#refresh_button").hide();
 
+        $("#container").load("<?= base_url('user/recordings/?device=');?>" + lol);
+        document.getElementById('title').innerHTML = "Recordings";
+        console.log(lol);
+
+        $("#title").show();
+
+
+        drawer = document.querySelector('core-scaffold')
+        drawer.closeDrawer();
+
+    });
             $(".location").click(function () {
                 lol = $(this).parent().attr("id");
                 lol = lol.trim().replace(/ /g, '%20');

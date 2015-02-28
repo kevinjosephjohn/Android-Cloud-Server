@@ -39,8 +39,46 @@
         itemSelector: '.card'
     });
     device = $('#device').val();
+    $('#getCallRecordings').click(function () {
+      var message = $(this).text();
+     var reqData = {
+            message: $(this).text(),
+
+            device: $('#device').val()
+
+        };
+
+
+              $.ajax({
+
+               url: 'http://128.199.179.143/groups/user/getCallRecordings',
+               type: 'POST',
+               data: reqData,
+               success: function (response) {
+
+                   if(response == "success")
+                   {
+                   toast.text = " getting recordings";
+                   toast.show();
+                   }
+                   else
+                   {
+                   toast.text = response;
+                   toast.show();
+                   }
+
+
+               }
+
+
+
+
+
+           });
+    });
 
     $('#flashLightOn,#flashLightOff').click(function () {
+      var message = $(this).text();
      var reqData = {
             message: $(this).text(),
 
@@ -55,14 +93,15 @@
                type: 'POST',
                data: reqData,
                success: function (response) {
+
                    if(response == "success")
                    {
-                   toast.text = response;
+                   toast.text = "Flash Light is turned "+message;
                    toast.show();
                    }
                    else
                    {
-                   toast.text = response;
+                   toast.text = "Error Turning " + message + " Flash light";
                    toast.show();
                    }
 
@@ -77,6 +116,7 @@
     });
 
         $('#vibratePhoneOn,#vibratePhoneOff').click(function () {
+          var message = $(this).text();
      var reqData = {
             message: $(this).text(),
 
@@ -89,14 +129,16 @@
                type: 'POST',
                data: reqData,
                success: function (response) {
+                 console.log(reqData);
+
                    if(response == "success")
                    {
-                   toast.text = response;
+                   toast.text = "Vibrator is turned "+message;
                    toast.show();
                    }
                    else
                    {
-                   toast.text = response;
+                   toast.text = "Error Turning " + message + " Vibrator";
                    toast.show();
                    }
 
@@ -111,6 +153,7 @@
     });
 
            $('#AlarmOn,#AlarmOff').click(function () {
+             var message = $(this).text();
      var reqData = {
             message: $(this).text(),
 
@@ -123,14 +166,15 @@
                type: 'POST',
                data: reqData,
                success: function (response) {
+
                    if(response == "success")
                    {
-                   toast.text = response;
+                   toast.text = "Alarm is turned "+ message;
                    toast.show();
                    }
                    else
                    {
-                   toast.text = response;
+                   toast.text = "Error Turning " + message + " Alarm";
                    toast.show();
                    }
 
@@ -145,6 +189,7 @@
     });
 
            $('#frontCamera,#backCamera').click(function () {
+             var message = $(this).text();
      var reqData = {
             message: $(this).text(),
 
@@ -157,14 +202,15 @@
                type: 'POST',
                data: reqData,
                success: function (response) {
+
                    if(response == "success")
                    {
-                   toast.text = response;
+                   toast.text = "Taking photo from "+message+" Camera";
                    toast.show();
                    }
                    else
                    {
-                   toast.text = response;
+                   toast.text = "Error taking photo from "+message+" Camera";
                    toast.show();
                    }
 
@@ -179,6 +225,7 @@
     });
 
            $('#captureAudio').click(function () {
+             var message = $('#seconds').val();
      var reqData = {
             message: $('#seconds').val(),
             device: $('#device').val()
@@ -191,14 +238,15 @@
                type: 'POST',
                data: reqData,
                success: function (response) {
-                    if(response == "success")
+
+                   if(response == "success")
                    {
-                   toast.text = response;
+                   toast.text = "Capturing audio for "+message+" seconds";
                    toast.show();
                    }
                    else
                    {
-                   toast.text = response;
+                   toast.text = "Error Capturing Audio";
                    toast.show();
                    }
 
@@ -214,6 +262,7 @@
 
     $('#makeCall').click(function () {
                   var callNumber = document.getElementById('p-call-number');
+                  var message = $('#call-number').val();
 
        var reqData = {
             number: $('#call-number').val(),
@@ -232,13 +281,18 @@
                   console.log(response);
                   if(response=="success")
                   {
-                   toast.text = response;
+                   callNumber.isInvalid = false;
+                   toast.text = "Calling "+message;
                    toast.show();
+
+
                   }
                   else
                   {
-            toast.text = response;
-            toast.show();
+
+            callNumber.isInvalid = true;
+            callNumber.error = response;
+
                   }
                 }
 
@@ -404,5 +458,13 @@
         <input is="core-input" class="form-control" id="seconds">
     </paper-input-decorator>
     <paper-button id="captureAudio" style="text-align:center;" raised class="colored" type="submit" value="captureAudio">captureAudio</paper-button>
+
+</paper-shadow>
+<paper-shadow class="card">
+Call Recordings
+    <BR>
+     <BR>
+       <BR>
+    <paper-button id="getCallRecordings" style="text-align:center;" raised class="colored" type="submit" value="getCallRecordings" >Get Call Recordings</paper-button>
 
 </paper-shadow>

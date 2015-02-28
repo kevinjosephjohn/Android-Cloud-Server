@@ -13,6 +13,13 @@
         height: auto;
     }
 </style>
+<script language="javascript">
+$( document ).ready(function() {
+
+    $("#container").load("<?= base_url('user/dashboard');?>");
+});
+
+</script>
 
 <body fullbleed style="font-family: 'Roboto', sans-serif;">
 
@@ -58,6 +65,7 @@
                   <core-item icon='communication:message' label='Messages' class='sms'></core-item>
                   <core-item icon='image:camera' label='Camera' class='camera'></core-item>
                   <core-item icon='image:audiotrack' label='Audio' class='audio'></core-item>
+                  <core-item icon='image:audiotrack' label='Recordings' class='recordings'></core-item>
                   <core-item icon='maps:my-location' label='Location' class='location'></core-item>
                   <core-item icon='social:cake' label='Extras' class='extras'></core-item>
 
@@ -72,20 +80,7 @@
         <!--<paper-progress id="progress" style="width:100%; display:block;background-color: #f8bbd0 ;" value="10" indeterminate="true"></paper-progress>-->
         <paper-spinner active=false></paper-spinner>
         <div id="container">
-            <paper-shadow class="main-card">
-                Days to expiry : 20
 
-                <br>
-                <paper-progress value="20" min="0" max="30"></paper-progress>
-
-            </paper-shadow>
-            <paper-shadow class="main-card">
-                Number of slaves : 2
-
-                <br>
-                <paper-progress value="2" min="0" max="100"></paper-progress>
-
-            </paper-shadow>
 
         </div>
 

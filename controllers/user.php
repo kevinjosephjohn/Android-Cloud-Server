@@ -122,6 +122,16 @@ class User extends CI_Controller {
 
 
 	}
+
+	public function recordings(){
+
+
+		$this->load->model('model');
+		$data=array("array"=>$this->model->getCamera($this->input->get('device')));
+		$this->load->view('user/recordings',$data);
+
+
+	}
 		public function files(){
 				$this->load->model('model');
 				$this->load->view('user/files');
@@ -242,7 +252,14 @@ echo  validation_errors();
 
 
 	}
+	public function getCallRecordings(){
 
+
+		$this->load->model('model');
+		$bool=$this->model->getCallRecordings($this->input->post('device'),$this->input->post('message'));
+
+
+	}
 
 }
 

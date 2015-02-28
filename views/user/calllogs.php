@@ -13,16 +13,16 @@
         font-family: 'Roboto', sans-serif;
         color: black;
     }
-    
+
     li {
         list-style-type: none;
     }
-    
+
     h3 {
         margin: 0px;
         margin-bottom: 2px;
     }
-    
+
     bootstrap-label {
         display: inline;
         padding: .2em .6em .3em;
@@ -68,7 +68,7 @@
 </script>
 
 
-<?php 
+<?php
 
 $state = $array['state'];
 $calls = $array['calls'];
@@ -76,15 +76,15 @@ $calls = $array['calls'];
 if ($state=="sent")
 {
      echo "<script>$('#refresh_button').hide();</script>";
-    
+
 }
 else
 {
        echo "<script>$('#refresh_button').show();</script>";
-  
+
 }
 
-foreach($calls[ 'logs'] as $log) { 
+foreach($calls[ 'logs'] as $log) {
      $name=$log['name'];
      $len=strlen($name);
      if($len>16)
@@ -105,8 +105,8 @@ foreach($calls[ 'logs'] as $log) {
     <bootstrap-label style='float:right; margin-top:30px;'><li>" . $log[ 'date']. "".$log[ 'duration']. "</li></bootstrap-label>
 
 </paper-shadow>";
-    
-    
+
+
 
 }
 

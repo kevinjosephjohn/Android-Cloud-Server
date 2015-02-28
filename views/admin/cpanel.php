@@ -26,6 +26,9 @@
               <label for="amount">Amount</label>
               <input type="text" class="form-control" id="amount" placeholder="amount">
             </div>
+
+
+
                                       <div class="form-group">
 
                   <input id="add"  type="submit" name="submit" class="btn btn-lg btn-primary" value="Submit">
@@ -71,14 +74,27 @@
          </div>
        </div>
        </div>
-       <div class="col-lg-6">
+       <div class="col-lg-4">
           <div class="panel panel-default" id="headings">
 
             <div class="panel-body">
-            <h1 class="page-header"><small>Statistics</small></h1>
-             <label>Total Users : </label><p>32</p><br>
-             <label>Total Devices : </label><p>122</p><br>
+            <h1 class="page-header"><small>Upload File</small></h1>
+            <div class="form-group">
+              <select id="activate_user" class="form-control" >
+               <?php foreach($users as $u) {
+                  if($u->active==0) {
 
+
+                    echo "<option value='$u->id'>$u->username</option>";
+                  }
+
+
+                }
+                ?>
+              </select>
+           <label for="amount">APK</label>
+           <input type="file" name="userfile" size="20" />
+           </div>
             </div>
           </div>
 

